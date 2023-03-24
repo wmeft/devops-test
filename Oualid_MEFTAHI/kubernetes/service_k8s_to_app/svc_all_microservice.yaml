@@ -9,7 +9,7 @@ spec:
         app: client
     ports:
     - port: 3000
-      targetPort: 3000
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -22,7 +22,7 @@ spec:
         app: comments
     ports:
     - port: 4001
-      targetPort: 4001
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -35,7 +35,7 @@ spec:
         app: moderation
     ports:
     - port: 4003
-      targetPort: 4003
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -48,7 +48,7 @@ spec:
         app: event-bus
     ports:
     - port: 4005
-      targetPort: 4005
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -61,7 +61,7 @@ spec:
         app: posts
     ports:
     - port: 4000
-      targetPort: 4000
+      targetPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -74,4 +74,4 @@ spec:
         app: query
     ports:
     - port: 4002
-      targetPort: 4002
+      targetPort: 80
