@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-svc-ext
+spec:
+  type: ExternalName
+  externalName: prometheus-service-cip.monitoring.svc.cluster.local
+  ports:
+    - port: 9090
+      targetPort: 9090

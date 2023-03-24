@@ -1,0 +1,97 @@
+pipeline {
+    agent any
+    tools {
+    }
+
+    
+    
+    stages{
+        stage ('Initialize Project to Build'){
+            steps{
+                script {
+                    if (!fileExists('devops-test')){
+                        sh '''
+                        echo "Create directory devops-test"
+                        mkdir devops-test
+                    '''
+                    }
+
+                }
+                dir ("devops-test"){
+                git (url: 'https://github.com/wmeft/devops-test.git') 
+		// You can use credentialsId ,branch in your private repository
+                }
+            }
+        }
+
+        stage ('Build Project'){
+            steps{
+                script{
+                    dir("devops-test/client"){
+                      sh 'npm run build'
+                }
+                    dir("devops-test/comments"){
+                      sh 'npm run build'
+                }
+		    dir("devops-test/moderation"){
+                      sh 'npm run build'
+                }
+		    dir("devops-test/event-bus"){
+                      sh 'npm run build'
+                }
+                     dir("devops-test/posts"){
+                      sh 'npm run build'
+                }
+                      dir("devops-test/query"){
+                      sh 'npm run build'
+                }
+
+
+                }
+            }
+        }
+        stage ('Build project images for dockerhub'){
+            steps{
+                script{
+                    sh 'docker build -f docker/client/Dockerfile . -t devops-test-oualid-client'
+                    sh 'docker build -f docker/comments/Dockerfile . -t devops-test-oualid-comment'
+                    sh 'docker build -f docker/moderation/Dockerfile . -t devops-test-oualid-moderation'
+                    sh 'docker build -f docker/event-bus/Dockerfile . -t devops-test-oualid-event-bus'
+                    sh 'docker build -f docker/posts/Dockerfile . -t devops-test-oualid-posts'
+                    sh 'docker build -f docker/query/Dockerfile . -t devops-test-oualid-query'
+                }
+            }
+        }
+
+       //  stage ('Push the docker image to private hub'){
+       //     steps{
+       //         script{
+       //             withDockerRegistry(credentialsId: 'harbor-registry', url: 'https://url-to-the-hub/project-name') {
+       //                 sh 'docker tag devops-test-oualid url-to-the-hub/project-name:${BUILD_NUMBER}'
+       //                 sh 'docker push url-to-the-hub/project-name:${BUILD_NUMBER}
+       //           }
+       //         }
+       //     }
+       //  }
+
+        
+        stage('Deploy devops-test-oualid on remote K8S cluster'){
+            steps{
+            withKubeConfig([credentialsId: 'kubernetes-token',
+                    serverUrl: 'https://10.6.100.111:6443',
+                    contextName: 'beynadmin-context',
+                    clusterName: 'kubernetes',
+                    namespace: 'devops-test'
+                    ]) {
+                        dir('kubernetes'){
+            sh 'kubectl apply -f deploy-devops-test-oualid.yaml'
+                        }
+                    }
+            }
+        }
+        
+
+    }
+
+}
+

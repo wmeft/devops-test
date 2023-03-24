@@ -1,0 +1,171 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-app
+  namespace: devops-test
+  labels:
+    app: cleint
+spec:
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect 
+          #  for private hub
+  selector:
+    matchLabels:
+      app: client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-app
+  namespace: devops-test
+  labels:
+    app: comments
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+      - name: comments
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect
+
+  selector:
+    matchLabels:
+      app: comments
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-app
+  namespace: devops-test
+  labels:
+    app: event-bus
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+      - name: event-bus
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect
+
+  selector:
+    matchLabels:
+      app: event-bus
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-app
+  namespace: devops-test
+  labels:
+    app: moderation
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: moderation
+    spec:
+      containers:
+      - name: moderation
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect
+
+  selector:
+    matchLabels:
+      app: moderation
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-app
+  namespace: devops-test
+  labels:
+    app: posts
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+      - name: posts
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect
+
+  selector:
+    matchLabels:
+      app: posts
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-app
+  namespace: devops-test
+  labels:
+    app: query
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+      - name: query
+        image: {{url-to-the-hub/imageName}}
+        #imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: cm-devops-test
+      imagePullSecrets:
+        - name: registry-connect
+
+  selector:
+    matchLabels:
+      app: query
+
+
+
+

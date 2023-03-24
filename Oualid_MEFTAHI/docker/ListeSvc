@@ -1,0 +1,6 @@
+client    svc-client
+comments  svc-comments
+event-bus svc-event-bus
+moderation svc-moderation
+posts     svc-posts
+query     svc-query

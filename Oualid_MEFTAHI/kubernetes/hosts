@@ -1,0 +1,14 @@
+[master-nodes]
+k8s-master-node-1 10.6.100.111
+
+[worker-nodes]
+k8s-worker-1 ansible_host=10.6.100.121
+k8s-worker-2 ansible_host=10.6.100.122
+k8s-worker-3 ansible_host=10.6.100.123
+
+[all:vars]
+ansible_user=root    #do not use root for ansible user, instead, use ansible_vault to create encrypted data (user and password)
+ansible_ssh_pass=root
+
+## Do not use root for ansible user, instead, use ansible_vault to create encrypted data (user and password)
+## Note that, this is only for test
