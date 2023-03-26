@@ -6,7 +6,7 @@ const CommentCreate = ({ postId }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     if (content.trim()) {
-      await axios.post(`http://localhost:4001/posts/${postId}/comments`, {
+      await axios.post(`http://svc-comments/posts/${postId}/comments`, {
         content,
       });
       setContent("");
