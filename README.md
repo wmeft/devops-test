@@ -17,7 +17,7 @@ We deploy our infrastructure with terraform in vcenter with provider ``vsphere``
 
 ## Docker
 
-In the ``docker`` section, you find multiple directory that contain ``Dockerfile`` for each microservice that are deployed in the next section. After building the microservices with **Jenkins**, we use **nginx image** to build images with the specific microservices name for each image (It recommended to use nginx or apache as reverse proxy in production environment). You find nomination in the ``Jenkinsfile`` in [Jenkins](#Jenkins) section for each microservice.
+In the **docker** section, you find multiple directory that contain ``Dockerfile`` for each microservice that are deployed in the next section. After building the microservices with **Jenkins**, we use **nginx image** to build images with the specific microservices name for each image (It recommended to use nginx or apache as reverse proxy in production environment). You find nomination in the ``Jenkinsfile`` in [Jenkins](#Jenkins) section for each microservice.
 
 ## Jenkins
 
