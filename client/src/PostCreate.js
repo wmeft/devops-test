@@ -7,7 +7,7 @@ const PostCreate = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     if (title.trim()) {
-      await axios.post("http://localhost:4000/posts/create", { title });
+      await axios.post("http://svc-posts/posts/create", { title });
       setTitle("");
     }
   };
