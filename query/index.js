@@ -39,7 +39,7 @@ app.post("/events", (req, res) => {
 
 app.listen(4002, async () => {
   console.log("Listening on http://localhost:4002");
-  const res = await axios.get("http://localhost:4005/events");
+  const res = await axios.get("http://svc-event-bus/events");
   for (let event of res.data) {
     handleEvents(event.type, event.data);
   }
