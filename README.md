@@ -8,7 +8,7 @@ It contain multi section to deploy the kubernetes cluster and all microservices 
 - [Docker](#Docker)
 - [Jenkins](#Jenkins)
 - [Kubernetes](#Kubernetes)
-- [Cluster architecture](#Cluster architecture)
+- [Architecture](#Architecture)
 - [Monitoring](#Monitoring)
 
 ## Infra
@@ -53,4 +53,4 @@ To expose our final application, we use ``nginx ingress`` or ``nodePort`` servic
 We use **prometheus** and **grafana**  to monitore our cluster. All configuration are stored in ``configMap`` object of kubernetes moutend as configuration file on kubernetes ``deployment``. You find the ``configMap`` and the ``deployment`` files in the monitoring directory.
 
 
-Note that the **nfs server** as volume point, we use ``managed-nfs`` as ``storageClass`` .
+Note that the **nfs server** is used as volume point, we use ``managed-nfs`` as ``storageClass`` .
